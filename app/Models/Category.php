@@ -24,40 +24,4 @@ class Category extends Model
     protected $dateFormat = 'Y-m-d H:i:s';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
-
-
-    public function __construct()
-    {
-        $this->table = 'category';
-    }
-
-    public function getCate()
-    {
-        return DB::table($this->table)->get();
-    }
-    public function insertCate($name, $mota)
-    {
-        DB::table($this->table)->insert([
-            'name_category' => $name,
-            'mota' => $mota
-        ]);
-    }
-
-    public function select_Cate_Where($id)
-    {
-        return DB::table($this->table)->where('id', $id)->first();
-    }
-
-    public function updateCate($id, $name, $mota)
-    {
-        DB::table($this->table)->where('id', $id)->update([
-            'name_category' => $name,
-            'mota' => $mota,
-        ]);
-    }
-
-    public function deleteCate($id)
-    {
-        DB::table($this->table)->delete($id);
-    }
 }

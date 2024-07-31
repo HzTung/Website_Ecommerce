@@ -7,24 +7,24 @@ use App\Models\Comments;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\CategoryService;
 use App\Services\ProductService;
 use Illuminate\Support\Facades\Auth;
 
 
 class HomePage extends Controller
 {
-    protected $cate_model, $product_model, $productService;
-    public function __construct(ProductService $productService)
+    protected $categoryService,  $productService;
+    public function __construct()
     {
-        $this->productService = $productService;
-        $this->cate_model = new Category();
-        $this->product_model = new Products();
+        $this->productService = new ProductService();
+        $this->categoryService = new CategoryService();
     }
 
     public function index()
     {
-        $getCate = $this->cate_model->getCate();
-        $getPro = $this->product_model->select_pro();
+        $getCate = $this->categoryService->getCate();
+        $getPro = $this->productService->select_pro();
         return view('clients.index', [
             'CateAll' => $getCate,
             'proAll' => $getPro
@@ -35,8 +35,8 @@ class HomePage extends Controller
     {
 
         $id = $request->id;
-        $getCate = $this->cate_model->getCate();
-        $pro = $this->product_model->select_Pro_where($id);
+        $getCate = $this->categoryService->getCate();
+        $pro = $this->productService->select_Pro_where($id);
         $proAll = Products::where('category_id', $pro->category_id)->get();
         $prosCollection = collect($proAll);
         $filteredPros = $prosCollection->reject(function ($proAll) use ($id) {
@@ -63,13 +63,13 @@ class HomePage extends Controller
     function ListProduct($id = '')
     {
         $name = 'Tất cả sản phẩm';
-        $getCate = $this->cate_model->getCate();
+        $getCate = $this->categoryService->getCate();
         if ($id !== '') {
-            $cate = Category::where('id', $id)->first();
+            $cate = $this->categoryService->select_Cate_Where($id);
             $name = $cate['name_category'];
             $getPro = Products::where('category_id', $id)->paginate(20);
         } else {
-            $getPro = $this->product_model->select_pro();
+            $getPro = $this->productService->select_pro();
         }
         return view('clients.listproduct', [
             'name' => $name,
@@ -80,7 +80,7 @@ class HomePage extends Controller
 
     function  ProductByCate(Request $request, $id)
     {
-        $getCate = $this->cate_model->getCate();
+        $getCate = $this->categoryService->getCate();
         $idCate = $request->id;
         $proAll =  Products::where('id', $idCate)->get();
 
@@ -96,7 +96,7 @@ class HomePage extends Controller
     function search(Request $request)
     {
         $search = $request->input('search_value');
-        $getCate = $this->cate_model->getCate();
+        $getCate = $this->categoryService->getCate();
         $results = Products::where('name_sp', 'LIKE', '%' . $search . '%')->paginate(4);
         return view('clients.search', [
             'search' => $search,

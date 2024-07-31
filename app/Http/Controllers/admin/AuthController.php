@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use  App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\UserRequest;
 use App\Models\Employees;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,7 @@ class AuthController extends Controller
         return view('admin.login');
     }
 
-    public function loginSubmit(Request $request)
+    public function loginSubmit(UserRequest $request)
     {
         $email = $request->input('email');
         $password = $request->input('password');

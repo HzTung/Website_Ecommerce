@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\admin\CateRequests;
+use App\Services\CategoryService;
 use Illuminate\Support\Facades\Validator;
 
 class CategoriesController extends Controller
@@ -17,14 +18,14 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $cate_model;
+    protected $categoryService;
     public function __construct()
     {
-        $this->cate_model = new Category();
+        $this->categoryService = new CategoryService();
     }
     public function index()
     {
-        $categories = $this->cate_model->getCate();
+        $categories = $this->categoryService->getCate();
         $title = 'Xóa danh mục';
         $text = "Bạn có chắc muốn xóa?";
         confirmDelete($title, $text);
@@ -57,12 +58,10 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, CateRequests $cateRequests)
+    public function store(CateRequests $cateRequests)
     {
-        $arr = $request->all();
-        $this->cate_model->name_category = $arr['name'];
-        $this->cate_model->mota = $arr['mota'];
-        $this->cate_model->save();
+        $request = $cateRequests->all();
+        $this->categoryService->insertCate($request['name_category'], $request['mota']);
         Alert::success('Success Title', 'Success Message');
         return redirect(route('homeCate'));
     }
@@ -88,7 +87,7 @@ class CategoriesController extends Controller
     public function edit($id, Request $request)
     {
         session()->put('id', $id);
-        $cateById = $this->cate_model->select_Cate_Where($id);
+        $cateById = $this->categoryService->select_Cate_Where($id);
         return view('admin.categories.edit', [
             'name' => 'Danh Muc',
             'key' => 'Edit',
@@ -128,7 +127,7 @@ class CategoriesController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         } else {
-            $this->cate_model->updateCate($id, $arr['name'], $arr['mota']);
+            $this->categoryService->updateCate($id, $arr['name'], $arr['mota']);
             Alert::success('Edit thành công');
             return redirect(route('homeCate'));
         }
@@ -142,7 +141,7 @@ class CategoriesController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $this->cate_model->deleteCate($id);
+        $this->categoryService->deleteCate($id);
         return redirect(route('homeCate'));
     }
 }

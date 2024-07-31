@@ -6,32 +6,54 @@ use App\Models\Products;
 
 class ProductService
 {
-
     public function select_pro()
     {
-        Products::
-            // ->select('product.*', 'name_category as name_cate')
-            // ->join('category', 'product.category_id', '=', 'category.id')
-            // ->9where(function($query){
-            // $query->orwhere()
-            // })
-            // ->limit($limit)
-            orderBy('id', 'DESC')
-            // ->get();
-            ->paginate(20);
+        return  Products::orderBy('id', 'DESC')->paginate(20);
     }
 
     public function insert_Pro($name, $quantity, $price, $mota, $img, $cate_id)
     {
-        Products::insert([
-            'name_sp' => $name,
-            'soluong' => $quantity,
-            'price' => $price,
-            'mota' => $mota,
-            'img' => $img,
-            'category_id' => $cate_id,
-        ]);
+        try {
+            Products::create([
+                'name_sp' => $name,
+                'soluong' => $quantity,
+                'price' => $price,
+                'mota' => $mota,
+                'img' => $img,
+                'category_id' => $cate_id,
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
-    // Add more service methods as needed
+    public function select_Pro_where($id)
+    {
+        return  Products::find($id);
+    }
+
+    public function updatePro($id, $name, $quantity, $price, $mota, $img, $cate_id)
+    {
+        try {
+            Products::where('id', $id)->updated([
+                'name_sp' => $name,
+                'soluong' => $quantity,
+                'price' => $price,
+                'mota' => $mota,
+                'img' => $img,
+                'category_id' => $cate_id
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
+    public function deletePro($id)
+    {
+        try {
+            Products::deleted($id);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

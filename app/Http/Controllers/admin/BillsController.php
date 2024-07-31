@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BillsDetail;
 use Illuminate\Http\Request;
 use App\Models\Bills;
+use App\Services\BillService;
 
 class BillsController extends Controller
 {
@@ -14,14 +15,14 @@ class BillsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $bill_model;
+    protected $billService;
     public function __construct()
     {
-        $this->bill_model = new Bills();
+        $this->billService = new BillService();
     }
     public function index()
     {
-        $getBill = $this->bill_model->getBills();
+        $getBill = $this->billService->getBills();
         return view('admin.bills.index', [
             'name' => 'Bill',
             'key' => 'Home',
@@ -100,7 +101,7 @@ class BillsController extends Controller
      */
     public function destroy($id)
     {
-        $this->bill_model->deleteBill($id);
+        $this->billService->deleteBill($id);
         return back();
     }
 }

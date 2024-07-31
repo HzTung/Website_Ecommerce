@@ -13,7 +13,11 @@ Echo.channel("notifications").listen("UserSessionChange", (e) => {
     });
 });
 
-const idRecipient = document.getElementById("user1").value;
+let idRecipient = document.getElementById("user1");
+if (idRecipient) {
+    idRecipient = idRecipient.value;
+}
+
 const idUser = document.getElementById("user2").value;
 var channelId = createChannelName(idRecipient, idUser);
 var idUserSidebar = [];
@@ -105,10 +109,14 @@ function addMessageToList(message, senderId, userId) {
     }
 
     messagesList.appendChild(newMessage);
-    messagesList.scrollTop = messagesList.scrollHeight; // Tự động cuộn đến tin nhắn mới nhất
+
+    // scroll when add new messages
+    messagesList.scrollTop = messagesList.scrollHeight;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
     var scrollBox = document.getElementById("messages-list");
-    scrollBox.scrollTop = scrollBox.scrollHeight;
+    if (scrollBox) {
+        scrollBox.scrollTop = scrollBox.scrollHeight;
+    }
 });

@@ -24,7 +24,7 @@ class CateRequests extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:category,name_category',
+            'name_category' => 'required|unique:category,name_category',
             'mota' => 'required',
         ];
     }
@@ -32,8 +32,8 @@ class CateRequests extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => ':attribute bắt buộc nhập',
-            'name.unique' => ':attribute đã tồn tại',
+            'name_category.required' => ':attribute bắt buộc nhập',
+            'name_category.unique' => ':attribute đã tồn tại',
             'mota.required' => ':attribute bắt buộc nhập'
         ];
     }
@@ -41,7 +41,7 @@ class CateRequests extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'Tên danh mục',
+            'name_category' => 'Tên danh mục',
             'mota' => 'Mô tả',
 
         ];

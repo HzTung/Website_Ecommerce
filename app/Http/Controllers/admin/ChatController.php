@@ -12,15 +12,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Services\MessagesService;
 use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
 {
-    public $message_model;
+    public $messagesService;
 
     public function __construct()
     {
-        $this->message_model = new Messages();
+        $this->messagesService = new MessagesService();
     }
 
     public function index()
@@ -51,7 +52,7 @@ class ChatController extends Controller
 
         $name_room = $this->createChannelName($id_user, $user_id);
         $user = Employees::where('id', $user_id)->first();
-        $msg = $this->message_model->getMessage($name_room);
+        $msg = $this->messagesService->getMessage($name_room);
 
         $allMsg = DB::table('messages')
             ->join('rooms', "messages.room_id", "=", "rooms.id")
@@ -66,12 +67,6 @@ class ChatController extends Controller
             'allMsg' => $allMsg
         ]);
     }
-
-    // public function greetReceiver(Request $request, Employees $receiver)
-    // {
-    //     broadcast(new MessageSent($receiver, "{$request->user()->name}"));
-    //     // return back();
-    // }
     function createChannelName($userId1, $userId2)
     {
         $ids = [$userId1, $userId2];
@@ -81,12 +76,6 @@ class ChatController extends Controller
 
     public function sendMessage(Request $request, $recipientId)
     {
-        // $message = new Messages();
-        // $message->content = $request->message;
-        // $message->from_user_id = auth()->id();
-        // $message->to_user_id = $recipientId;
-        // $message->save();
-
         $channelName = $this->createChannelName(auth('admin')->id(), $recipientId);
         $message = $request->input('message');
 

@@ -33,13 +33,4 @@ class Messages extends Model
     {
         return $this->belongsTo(Employees::class);
     }
-
-    public function getMessage($name)
-    {
-        return DB::table('messages')
-            ->select('messages.*')
-            ->join('rooms', 'messages.room_id', '=', 'rooms.id')
-            ->where('room_name', $name)
-            ->get();
-    }
 }

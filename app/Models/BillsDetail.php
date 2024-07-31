@@ -30,15 +30,4 @@ class BillsDetail extends Model
     ];
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
-    public function __construct()
-    {
-        $this->table = 'bill_detailed';
-    }
-
-
-    public function getBillDetail()
-    {
-        $data = DB::table($this->table)->get();
-        return $data;
-    }
 }

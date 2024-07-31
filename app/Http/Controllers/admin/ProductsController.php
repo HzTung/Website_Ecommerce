@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Http\ViewModels\ProductViewModel;
 use App\Models\Category;
 use App\Models\Products;
+use App\Services\CategoryService;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -21,16 +24,17 @@ class ProductsController extends Controller
      */
 
 
-    private $product_model, $cate_model;
+    protected $productService, $categoryService, $productViewModel;
 
     public function __construct()
     {
-        $this->product_model = new Products();
-        $this->cate_model = new Category();
+        $this->productService = new ProductService();
+        $this->categoryService = new CategoryService();
+        $this->productViewModel = new ProductViewModel();
     }
     public function index()
     {
-        $listCate = $this->cate_model->getCate();
+        $listCate = $this->categoryService->getCate();
         $ListProduct = Products::paginate(4);
         $title = 'Xóa sản phẩm';
         $text = "Bạn có chắc muốn xóa?";
@@ -51,7 +55,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $cateAll = $this->cate_model->getCate();
+        $cateAll = $this->categoryService->getCate();
         return view('admin.products.add', [
             'name' => 'Sản Phẩm',
             'key' => 'ADD',
@@ -105,7 +109,7 @@ class ProductsController extends Controller
 
             // $name = $request->img->storeAs('public/uploads/', $fileName); // save in storege
 
-            $this->product_model->insert_Pro($arr['name_sp'], $arr['quantity'], $arr['price'], $arr['mota'], $fileName, $arr['cate']);
+            $this->productService->insert_Pro($arr['name_sp'], $arr['quantity'], $arr['price'], $arr['mota'], $fileName, $arr['cate']);
             Alert::success('Thêm sản phẩm thành công!');
             return redirect()->route('homeProduct')->with('msg', 'Nhập dữ liệu thành công');
         }
@@ -131,9 +135,9 @@ class ProductsController extends Controller
     public function edit($id)
     {
         session()->put('id', $id);
-        $cateAll = $this->cate_model->getCate();
-        $pro = $this->product_model->select_Pro_where($id);
-        $getCate_id = $this->cate_model->select_Cate_Where($pro->category_id);
+        $cateAll = $this->categoryService->getCate();
+        $pro = $this->productService->select_Pro_where($id);
+        $getCate_id = $this->categoryService->select_Cate_Where($pro->category_id);
         return view('admin.products.edit', [
             'name' => 'Sản Phẩm',
             'key' => 'Edit',
@@ -142,7 +146,6 @@ class ProductsController extends Controller
             'cateAll' => $cateAll,
             'ProById' => $pro,
             'cateById' => $getCate_id
-
         ]);
     }
 
@@ -207,7 +210,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $this->product_model->deletePro($id);
+        $this->productService->deletePro($id);
         return back()->with('msg', 'Xóa dữ liệu thành công');
     }
 }

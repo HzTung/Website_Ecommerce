@@ -1,4 +1,5 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <input id="user2" type="hidden" name="userId" value="{{ Auth::guard('admin')->user()->id }}">
     <!-- Brand Logo -->
     <div class="brand-link d-flex justify-content-between">
         <span class="brand-text font-weight-light ">{{ Auth::guard('admin')->user()->name }} |
@@ -11,7 +12,8 @@
         <!-- SidebarSearch Form -->
         <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                    aria-label="Search">
                 <div class="input-group-append">
                     <button class="btn btn-sidebar">
                         <i class="fas fa-search fa-fw"></i>
