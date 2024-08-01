@@ -1,46 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="{{asset('assets/css/login.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     @include('sweetalert::alert')
 
 </head>
+
 <body>
-    <form class="form-box" method="post" action="{{route('user.loginSubmit')}}">
-        @csrf
-        <div class="text">Login Here</div>
-        <div class="form-field">
-            <input type="text" class="form-input-1" name="email" value="{{old('email')}}" placeholder=" " >
-            <label for="name" class="form-label-1">Email:</label>
-           
-            <input type="password" class="form-input-2" name="password" value="{{Old('password')}}" placeholder=" " >
-            <label for="password" class="form-label-2">Password:</label>
-          
+    <section class="vh-100" style="background-color: #595aba;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card" style="border-radius: 1rem;">
+                        <div class="row g-0">
+                            <div class="col-md-6 col-lg-5 d-none d-md-block">
+                                <img src="" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                            </div>
+                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                                <div class="card-body p-4 p-lg-5 text-black">
+
+                                    <form action="{{ route('user.loginSubmit') }}" method="post">
+                                        @csrf
+                                        <div class="d-flex align-items-center mb-3 pb-1">
+                                            <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                                            <a href="{{ route('homepage') }}"> <img class="w-25"
+                                                    src="{{ asset('assets/imgs/logo (1).png') }}" alt=""></a>
+                                        </div>
+
+                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your
+                                            account
+                                        </h5>
+
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="form2Example17">Email address</label>
+                                            <input type="email" id="form2Example17"
+                                                class="form-control form-control-lg" name="email"
+                                                value="{{ old('email') }}" />
+                                            @error('email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="form2Example27">Password</label>
+                                            <input type="password" id="form2Example27"
+                                                class="form-control form-control-lg" name="password"
+                                                value="{{ old('password') }}" />
+                                            @error('password')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="pt-1 mb-4">
+                                            <button data-mdb-button-init data-mdb-ripple-init
+                                                class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                        </div>
+
+
+                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a
+                                                href="{{ route('user.signup') }}" style="color: #393f81;">Register
+                                                here</a>
+                                        </p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button class="Login" type="submit" name="login" value="Đăng Nhập">Login</button>
-        <div class="text-bottom">
-            <p>Don't have an accuont?</p>
-            <a href="{{route('user.signup')}}" class="sign-up">Sign up </a>
-            <b>here</b>
-            <div class="log-in">Log in With</div>
-            @error('email')
-                <span style="color: red"> {{$message}}</span>
-                <br>
-            @enderror
-            @error('password')
-                <span style="color: red"> {{$message}}</span>
-             @enderror
-             @if (session('msg'))
-                <span style="color: red"> {{session('msg')}}</span>
-            @endif
-        </div>
-    </form>        
-    
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </body>
+
 </html>
-
-

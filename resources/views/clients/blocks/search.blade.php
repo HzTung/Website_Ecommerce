@@ -1,10 +1,11 @@
 <div class=" p-4" id="search" style="display: none">
     <div class="d-flex justify-content-around ">
-        <div style="width: 12rem;">
+        <a href="{{ route('homepage') }}" style="width: 12rem;">
             <img class="w-100" src="{{ asset('assets/imgs/logo (1).png') }}" alt="Logo">
-        </div>
+        </a>
         <div class="row">
-            <form method="get" action="{{ route('search') }}" class="d-flex justify-content-center align-items-center">
+            <form method="get" action="{{ route('search') }}"
+                class="d-flex justify-content-center align-items-center">
                 <div class="form-outline" style="height: 30px;width:280px">
                     <input id="search-input" type="search" class="form-control" name="search_value"
                         placeholder="Search">

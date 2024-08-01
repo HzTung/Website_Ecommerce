@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Models\User;
 use App\Models\Products;
+use App\Models\Employees;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -43,5 +44,13 @@ class ApiController extends Controller
         $validatedData = $validator->validated();
         User::where('id', $id)->update($validatedData);
         return new Response('Profile updated successfully', Response::HTTP_OK);
+    }
+    public function getUser(Request $request)
+    {
+        $id = $request->input('query');
+        $user = Employees::all()->reject(function (Employees $user) use ($id) {
+            return $user->id == $id;
+        })->pluck('id');
+        return response()->json($user);
     }
 }

@@ -34,4 +34,4 @@ Route::get('/cart', function () {
 Route::get('/search', [ApiController::class, 'search']);
 Route::post('/profileUpdate', [ApiController::class, 'profile']);
 
-Route::get('/getUser', [AuthController::class, 'getUser']);
+Route::get('/getUser', [ApiController::class, 'getUser']);

@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     public function index()
     {
-        $id = Auth::user()->id;
+        $id = Auth::guard('admin')->user()->id;
         $users = Employees::all()->reject(function (Employees $users) use ($id) {
             return $users->id === $id;
         });
@@ -75,14 +75,5 @@ class AuthController extends Controller
         dd($id);
         Employees::deleted($id);
         return back();
-    }
-
-    public function getUser(Request $request)
-    {
-        $id = $request->input('query');
-        $user = Employees::all()->reject(function (Employees $user) use ($id) {
-            return $user->id == $id;
-        })->pluck('id');
-        return response()->json($user);
     }
 }
