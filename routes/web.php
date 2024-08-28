@@ -8,11 +8,13 @@ use App\Http\Controllers\clients\HomePage;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\ChatController;
 use App\Http\Controllers\admin\BillsController;
-use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\clients\CartController;
 use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\CategoriesController;
+use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\clients\AuthUserController;
+use App\Http\Controllers\admin\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,37 +35,30 @@ use App\Http\Controllers\clients\AuthUserController;
 Route::get('admin/login', [AuthController::class, 'login'])->name('admin.login');
 Route::post('admin/login', [AuthController::class, 'loginSubmit'])->name('admin.loginSubmit');
 
-Route::middleware('checkAuth')->prefix('admin')->group(function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'checkAuth', 'as' => 'admin.'], function () {
     Route::get('/', function () {
         return view('admin.Dashboard');
     })->name('home');
 
 
     //logout
-    Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 
     // create employees 
 
-    Route::middleware('checkRoles:admin')->prefix('user')->group(function () {
-        Route::get('/', [AuthController::class, 'index'])->name('admin.user');
-        Route::get('create', [AuthController::class, 'createUser'])->name('employees.create');
-        Route::delete('delete/{id}', [AuthController::class, 'destroy'])->name('admin.destroy');
-    });
 
 
+    Route::resource('user', UserController::class);
 
-    Route::resource('categories', CategoriesController::class)->names([
-        'index' => 'homeCate',
-        'create' => 'addCate',
-        'edit' => 'editCate',
-        'destroy' => 'deleteCate'
-    ])->middleware('checkRoles:admin|nhanvien');
-    Route::middleware('checkRoles:nhanvien|admin')->resource('products', ProductsController::class)->names([
-        'index' => 'homeProduct',
-    ]);
+    Route::resource('category', CategoriesController::class);
 
-    Route::resource('bills', BillsController::class)->middleware('checkRoles:admin|admin');
+    Route::resource('products', ProductsController::class);
+
+    Route::resource('bills', BillsController::class);
+
+    Route::resource('role', RoleController::class);
+
 
     // Route::get('chat', [ChatController::class, 'index'])->name('chat');
     Route::post('chat/send-message/{id?}', [ChatController::class, 'sendMessage'])->name('send.message');

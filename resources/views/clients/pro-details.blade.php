@@ -1,26 +1,24 @@
 @extends('clients.layouts.clientLayout')
 @section('slider')
-    
 @endsection
 
 @section('main')
-
     <div class="product-details">
         <div class="container">
             <div class="text-heading">
-                <a href="{{route('homepage')}}">Trang Chủ</a> /
-                <a href="{{route('product')}}">Products</a> /
-                {{$product->name_sp}}
+                <a href="{{ route('homepage') }}">Trang Chủ</a> /
+                <a href="{{ route('product') }}">Products</a> /
+                {{ $product->name_sp }}
             </div>
             <div class="product-main">
-                <img src="{{asset('uploads/'.$product->img)}}" alt="">
+                <img src="{{ asset('uploads/' . $product->img) }}" alt="">
                 <div class="product-content">
-                    <p class="name-product">{{$product->name_sp}}</p>
+                    <p class="name-product">{{ $product->name_sp }}</p>
                     <div class="price-product">
-                       {{$product->price}} đ
+                        {{ $product->price }} đ
                     </div>
 
-                    <form action="{{route('addCart',$product->id)}}" method="post">
+                    <form action="{{ route('addCart', $product->id) }}" method="post">
                         @csrf
                         <div class="variant-sizguide">
                             <div class="size-product">
@@ -62,22 +60,22 @@
             <div #swiperRef="" class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     @foreach ($proAll as $k => $v)
-                    <a href="{{route('proDetails',$v->id)}}" class="swiper-slide row">
-                        <div class="">
-                            <img src="{{asset('uploads/'.$v->img)}}" alt="">
-                        </div>
-                        <div class="">
-                            <p>{{$v->name_sp}}</p>
-                            <p style="
-                                color: #ff00009e;">{{$v->price}} đ</p>
-                        </div>
-                    </a>
+                        <a href="{{ route('proDetails', $v->id) }}" class="swiper-slide row">
+                            <div class="">
+                                <img src="{{ asset('uploads/' . $v->img) }}" alt="">
+                            </div>
+                            <div class="">
+                                <p>{{ $v->name_sp }}</p>
+                                <p style="
+                                color: #ff00009e;">{{ $v->price }} đ</p>
+                            </div>
+                        </a>
                     @endforeach
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
-              </div>
+            </div>
         </div>
     </div>
 @endsection

@@ -107,7 +107,7 @@
 
 
                                         </ul>
-                                        <form class="bg-white mb-3" action="{{ route('send.message', $user->id) }}"
+                                        <form class="bg-white mb-3" action="{{ route('admin.send.message', $user->id) }}"
                                             method="post">
                                             @csrf
                                             <div data-mdb-input-init class="form-outline">

@@ -12,7 +12,7 @@
         <ul class="list-unstyled mb-0">
             @foreach ($listUsers as $user)
                 <li class="p-2 border-bottom">
-                    <a href="{{ route('chat.private', $user->id) }}" class="d-flex justify-content-between">
+                    <a href="{{ route('admin.chat.private', $user->id) }}" class="d-flex justify-content-between">
                         <div class="d-flex flex-row">
                             <div class="pt-1">
                                 <p class="fw-bold mb-0">{{ $user->name }}</p>

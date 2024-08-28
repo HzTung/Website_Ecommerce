@@ -51,7 +51,7 @@ class ProductService
     public function deletePro($id)
     {
         try {
-            Products::deleted($id);
+            Products::destroy($id);
         } catch (\Throwable $th) {
             //throw $th;
         }

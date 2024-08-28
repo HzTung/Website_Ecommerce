@@ -11,7 +11,7 @@
                     <div class="col alert alert-success">{{ session('msg') }}</div>
                 @endif
                 <div class="col-md-12 ">
-                    <a href="{{ route('products.create') }}" class="btn btn-success m-2 float-right">ADD</a>
+                    <a href="{{ route('admin.products.create') }}" class="btn btn-success m-2 float-right">ADD</a>
                 </div>
             </div>
             <div class="col-md-12">
@@ -52,14 +52,15 @@
                                 </td>
 
                                 <td class="row">
-                                    <a class='btn btn-default mr-2' href='{{ route('products.edit', $row->id) }} '>Edit</a>
+                                    <a class='btn btn-default mr-2'
+                                        href='{{ route('admin.products.edit', $row->id) }} '>Edit</a>
                                     {{-- <form  action="{{ route('products.destroy',$row->id) }}" method="post">
                                     @method('delete')
                                     @csrf
                                     <button class='btn btn-danger' type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Delete</button>
                              
                                 </form> --}}
-                                    <a href="{{ route('products.destroy', $row->id) }}" class="btn btn-danger"
+                                    <a href="{{ route('admin.products.destroy', $row->id) }}" class="btn btn-danger"
                                         data-confirm-delete="true">Delete</a>
 
                                 </td>

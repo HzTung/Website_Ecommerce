@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class CheckAuth
 {
     /**
@@ -19,6 +20,10 @@ class CheckAuth
     {
         if (!Auth::guard('admin')->check()) {
             return redirect(route('admin.login'));
+        }
+        $route = $request->route()->getName();
+        if ($request->user('admin')->cant($route)) {
+            return redirect()->route('admin.home')->with('msg', 'bạn không có quyền truy cập!');
         }
         return $next($request);
     }

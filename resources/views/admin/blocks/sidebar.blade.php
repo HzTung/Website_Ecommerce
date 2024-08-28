@@ -30,7 +30,7 @@
         with font-awesome or any other icon font library -->
 
                 <li class="nav-item">
-                    <a href="{{ route('homeCate') }}" class="nav-link">
+                    <a href="{{ route('admin.category.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Danh muc
@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('homeProduct') }}" class="nav-link">
+                    <a href="{{ route('admin.products.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Sản phẩm
@@ -46,7 +46,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('bills.index') }}" class="nav-link">
+                    <a href="{{ route('admin.bills.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Đơn Hàng
@@ -72,7 +72,7 @@
                     </a>
                 </li> --}}
                 <li class="nav-item">
-                    <a href="{{ route('chat.private') }}" class="nav-link">
+                    <a href="{{ route('admin.chat.private') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Chat
@@ -81,10 +81,18 @@
                 </li>
                 @if (Auth::guard('admin')->user()->position == 'admin')
                     <li class="nav-item">
-                        <a href="{{ route('admin.user') }}" class="nav-link">
+                        <a href="{{ route('admin.user.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 nhan vien
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.role.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                role
                             </p>
                         </a>
                     </li>

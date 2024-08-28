@@ -211,6 +211,7 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         $this->productService->deletePro($id);
+        Alert::success('Xóa sản phẩm thành công!');
         return back()->with('msg', 'Xóa dữ liệu thành công');
     }
 }

@@ -4,39 +4,23 @@ namespace App\Models;
 
 use App\Models\Messages;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+
 class Employees extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable;
 
     protected $table = 'employees';
     public $timestamps = true;
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
-    public function hasRole($role)
-    {
-        // dd($role);
-        // DB::enableQueryLog();
-        foreach ($role as $key => $value) {
 
-            $user = Employees::where('position', $value)
-                ->where('id', Auth::guard('admin')->id())
-                ->first();
-
-            if ($user) {
-                return true;
-            }
-            // $sql = DB::getQueryLog(); // log query
-            // dd($sql);
-        }
-        return false;
-    }
 
     /**
      * The attributes that are mass assignable.
@@ -71,15 +55,53 @@ class Employees extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    public function setPasswordAttribute($value)
+    {
+        if (!empty($value)) {
+            $this->attributes['password'] = Hash::make($value);
+        }
+    }
 
     /**
      * A user can have many messages
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * 
+     * 
      */
+
+
     public function messages()
     {
         return $this->hasMany(Messages::class);
+    }
+
+
+    // public function permissions()
+    // {
+    //     return ['category.index'];
+    // }
+    public function hasPermission($route): bool
+    {
+        $routes = $this->routes();
+        return in_array($route, $routes) ? true : false;
+    }
+
+    public function routes()
+    {
+        $data = [];
+        foreach ($this->getRoles as $role) {
+            $permission = json_decode($role->permission);
+            foreach ($permission as $value) {
+                if (!in_array($value, $data)) {
+                    array_push($data, $value);
+                }
+            }
+        }
+        return $data;
+    }
+    public function getRoles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user', 'id_user', 'id_role');
     }
 }

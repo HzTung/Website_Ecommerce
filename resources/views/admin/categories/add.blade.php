@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <form method="post" action="{{ route('categories.store') }}">
+                    <form method="post" action="{{ route('admin.category.store') }}">
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputEmail1">Name Category</label>

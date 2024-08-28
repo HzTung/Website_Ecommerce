@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <form method="post" action="{{ route('products.store') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên Sản Phẩm</label>
@@ -66,7 +66,7 @@
                             @enderror
                         </div>
                         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                        <a href="{{ route('homeProduct') }}" class="btn btn-danger">Canel</a>
+                        <a href="{{ route('admin.products.index') }}" class="btn btn-danger">Canel</a>
                     </form>
                 </div>
             </div>
