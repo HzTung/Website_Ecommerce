@@ -1,5 +1,5 @@
 <div id="category  ">
-    <div class="container">
+    <div class="container d-none d-md-block">
         <div class="d-flex justify-content-around w-75 mx-auto text-center">
             <a href="{{ route('product', 1) }}" class="box-category ">
                 <div class="img-category">

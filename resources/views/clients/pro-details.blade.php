@@ -7,7 +7,7 @@
         <div class="container-md">
             <div class="text-heading">
                 <a href="{{ route('homepage') }}">Trang Chủ</a> /
-                <a href="{{ route('product') }}">Products</a> /
+                <a href="{{ route('product') }}">Sản phẩm</a> /
                 {{ $product->name_sp }}
             </div>
             <div class="d-flex flex-column flex-md-row justify-content-center ">

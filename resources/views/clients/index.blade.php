@@ -1,12 +1,15 @@
 @extends('clients.layouts.clientLayout')
 
 @section('slider')
-    <div class="swiper">
+    <div class="swiper d-none d-md-block">
         <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="{{ asset('assets/imgs/slideshow_1.jpg') }}" alt=""></div>
             <div class="swiper-slide"><img src="{{ asset('assets/imgs/slideshow_2.jpg') }}" alt=""></div>
         </div>
         <div class="swiper-pagination"></div>
+    </div>
+    <div>
+        <img class="d-block d-md-none img-fluid" src="{{ asset('assets/imgs/slideshowmobile.jpg') }}" alt="">
     </div>
 @endsection
 

@@ -58,11 +58,11 @@
             </div>
         </div>
     </div>
-    <div class="tablet d-none container-lg">
+    <div class="tablet d-none container-lg py-3">
         <div class="d-flex justify-content-between align-items-center">
-            <div class="">
-                <a href="{{ route('homepage') }}"> <img class="" src="{{ asset('assets/imgs/logo.png') }}"
-                        alt=""></a>
+            <div class="w-25">
+                <a class="w-50" href="{{ route('homepage') }}"> <img class="w-100 img-fluid"
+                        src="{{ asset('assets/imgs/logo.png') }}" alt=""></a>
             </div>
             <div class="d-flex justify-content-around ">
                 <a href="" id="iConSearch" class="w-50 px-2"><i class="ti-search iConSearch"></i></a>

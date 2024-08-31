@@ -88,7 +88,8 @@ class HomePage extends Controller
             'clients.pro-cate',
             [
                 'CateAll' => $getCate,
-                'proAll', $proAll
+                'proAll',
+                $proAll
             ]
         );
     }

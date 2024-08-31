@@ -16,9 +16,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthUserController extends Controller
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function login()
     {
@@ -61,16 +59,22 @@ class AuthUserController extends Controller
         return view('clients.signup');
     }
 
-    public function signupSubmit(UserRequest $request)
+    public function signupSubmit(Request $request)
     {
-        $validator = $request->validated();
+        $validator = validator::make($request->all(), [
+            'fullname' => 'required|unique:tbl_users',
+            'password' => 'required|min:6',
+            'email' => 'required|email|unique:tbl_users'
+        ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        $user = User::create($validator);
-        Auth::guard('web')->login($user);
-
-        return redirect()->route('homepage');
+        try {
+            $user = User::create($validator->validate());
+            Auth::guard('web')->login($user);
+            return redirect()->route('homepage');
+        } catch (\Throwable $th) {
+        }
     }
 
     public function profile()
