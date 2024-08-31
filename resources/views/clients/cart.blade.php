@@ -1,7 +1,7 @@
 @extends('clients.layouts.clientLayout')
 
 @section('main')
-    <div class="container">
+    <div class="container mt-5">
         @if (session()->has('cart') && count(session('cart')) > 0)
             <table class="table ">
                 <thead class="thead-light">

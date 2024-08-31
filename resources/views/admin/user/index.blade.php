@@ -20,7 +20,6 @@
                             <th scope="col">#</th>
                             <th scope="col">Tên nhân viên</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Create At</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -30,7 +29,6 @@
                                 <td scope="col">{{ $loop->iteration }}</td>
                                 <td scope="col">{{ $item->name }}</td>
                                 <td scope="col">{{ $item->email }}</td>
-                                <td scope="col">{{ $item->updated_at }}</td>
                                 <td class="row">
                                     <a href="{{ route('admin.user.edit', $item->id) }}"
                                         class="btn btn-default mx-2">Edit</a>

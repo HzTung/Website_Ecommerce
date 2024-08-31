@@ -3,14 +3,10 @@
 @section('slider')
     <div class="swiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="{{asset('assets/imgs/slideshow_1.jpg')}}" alt=""></div>
-            <div class="swiper-slide"><img src="{{asset('assets/imgs/slideshow_2.jpg')}}" alt=""></div>
+            <div class="swiper-slide"><img src="{{ asset('assets/imgs/slideshow_1.jpg') }}" alt=""></div>
+            <div class="swiper-slide"><img src="{{ asset('assets/imgs/slideshow_2.jpg') }}" alt=""></div>
         </div>
-        <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
-        <!-- Add Navigation -->
-        <!-- <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div> -->
     </div>
 @endsection
 
@@ -18,8 +14,12 @@
     @include('clients.blocks.category')
     @include('clients.blocks.collection_heading')
     @include('clients.blocks.collection')
+    @include('clients.blocks.element')
+    @include('clients.blocks.parallax')
+    @include('clients.blocks.collection')
+    @include('clients.blocks.test')
 @endsection
 
 @section('scripts')
-    <script src="{{asset('assets/js/sliderSwiper.js')}}"></script>
+    <script src="{{ asset('assets/js/sliderSwiper.js') }}"></script>
 @endsection

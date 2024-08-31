@@ -20,8 +20,8 @@
                                     $sort = [Auth::guard('admin')->user()->id, $user->id];
                                     sort($sort);
                                     $channel = implode('-', $sort);
-                                    $user_sent = $allMsg->where('room_name', $channel)->sortByDesc('sent_at')->first()
-                                        ->user_id;
+                                    $message = $allMsg->where('room_name', $channel)->sortByDesc('sent_at')->first();
+                                    $user_sent = $message ? $message->user_id : null;
 
                                 @endphp
                                 <p id ="textBox-{{ $channel }}" class="small text-muted">
@@ -29,6 +29,7 @@
                                         You:
                                         {{ $allMsg->where('room_name', $channel)->sortByDesc('sent_at')->first()->message_text }}
                                 </p>
+                            @elseif($user_sent == null)
                             @else
                                 {{ $allMsg->where('room_name', $channel)->sortByDesc('sent_at')->first()->message_text }}
             @endif

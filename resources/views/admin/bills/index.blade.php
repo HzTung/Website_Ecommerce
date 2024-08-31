@@ -27,9 +27,9 @@
                                 <td>{{ $row->ngaymua }}</td>
                                 <td class="row d-flex justify-content-center">
                                     <a class='btn btn-info mr-2'
-                                        href="{{ route('bills.show', ['bill' => $row->id]) }}">Xem</a>
+                                        href="{{ route('admin.bills.show', ['bill' => $row->id]) }}">Xem</a>
 
-                                    <form action="{{ route('bills.destroy', $row->id) }}" method="post">
+                                    <form action="{{ route('admin.bills.destroy', $row->id) }}" method="post">
                                         @method('delete')
                                         @csrf
                                         <button class='btn btn-danger' type="submit"

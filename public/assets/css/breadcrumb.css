@@ -2,30 +2,27 @@
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
+
 }
 
-.breadcrumb .container {
-    margin: 0 9rem;
-    padding: 0 2rem;
-}
 
-.breadcrumb .container .text-top a {
+.breadcrumb .text-top a {
     color: #ccc;
 }
 
-.breadcrumb .container .text-top a:hover {
+.breadcrumb .text-top a:hover {
     color: black;
     transition: .2s linear;
 }
 
-.breadcrumb .container .text-main {
+.breadcrumb .text-main {
     font-size: 2rem;
     font-weight: 600;
     margin: 3rem 0;
     text-align: center;
 }
 
-.breadcrumb .container .text-bottom {
+.breadcrumb .text-bottom {
     color: black;
     cursor: pointer;
     display: inline-block;
@@ -35,11 +32,15 @@
     padding: 5px;
 }
 
-.breadcrumb .container .text-bottom:hover .breadcrumb-list {
+.breadcrumb .text-bottom:hover .breadcrumb-list {
     display: block;
+    z-index: 10;
 }
 
+
+
 .breadcrumb-list {
+    background-color: rgb(251, 251, 251);
     position: absolute;
     width: 160%;
     display: none;
@@ -63,5 +64,5 @@
 }
 
 .breadcrumb-list a:hover {
-    color: #ccc;
+    color: #63daa9;
 }

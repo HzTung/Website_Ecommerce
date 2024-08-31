@@ -1,13 +1,14 @@
 <div id="header">
     <div class="container-nav">
-        <div class="container-fluid row">
+        <div class="container-fluid row ">
             <div class="d-flex justify-content-between align-items-center p-3 mb-4">
                 <div class="">
                     <img src=" {{ asset('assets/imgs/flag-vie2.png') }}" alt="">
                     <img src=" {{ asset('assets/imgs/flag-en2.png') }}" alt="">
                 </div>
                 <div style="width:12rem">
-                    <img class="w-100" src="{{ asset('assets/imgs/logo (1).png') }}" alt="">
+                    <a href="{{ route('homepage') }}" class="w-100"><img class="w-100"
+                            src="{{ asset('assets/imgs/logo.png') }}" alt=""></a>
                 </div>
                 <div class="d-flex justify-content-around" style="width:100px">
                     <a href="" id="iConSearch" class="w-50"><i class="ti-search iConSearch"></i></a>
@@ -47,15 +48,46 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li><a href="">Bộ Sưu Tập</a></li>
+                    <li><a href="" class="">Bộ Sưu Tập</a></li>
                     <li><a href="">Bộ phối</a></li>
                     <li><a href="">Bài viết</a></li>
-                    <li><a href="">Chăm sóc khách hàng</a></li>
-                    <li><a href="">Tuyển dụng</a></li>
-                    <li><a href="">Liên hệ</a></li>
+                    <li><a href="" class="d-none d-xl-block">Chăm sóc khách hàng</a></li>
+                    <li><a href="" class="">Tuyển dụng</a></li>
+                    <li><a href="" class="d-none d-xl-block">Liên hệ</a></li>
                 </ul>
             </div>
         </div>
+    </div>
+    <div class="tablet d-none container-lg">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="">
+                <a href="{{ route('homepage') }}"> <img class="" src="{{ asset('assets/imgs/logo.png') }}"
+                        alt=""></a>
+            </div>
+            <div class="d-flex justify-content-around ">
+                <a href="" id="iConSearch" class="w-50 px-2"><i class="ti-search iConSearch"></i></a>
+                <a href="{{ route('showCart') }}" class="w-50 px-2"><i class="ti-shopping-cart"></i></a>
+                @if (Auth::check())
+                    <a id="iconUser" href="#" class="w-50 px-2"><i class="ti-user"></i></a>
+                    <ul id="userForm" style="display: none; position: absolute; transition: transform 0.3s ease;">
+                        <li><a href="{{ route('user.profile') }}">Cập nhật thông tin </a></li>
+                        <i>
+                            <form action="{{ route('user.logout') }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" style="border: unset">Đăng xuất</button>
+                            </form>
+                        </i>
+                    </ul>
+                @else
+                    <a href="{{ route('user.login') }}" class="w-50 px-2"><i class="ti-user"></i></a>
+                @endif
+                <i class="ti-menu px-2"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu">
 
     </div>
 </div>

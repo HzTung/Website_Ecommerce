@@ -6,6 +6,8 @@ use App\Models\Role;
 use App\Models\Employees;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\RoomMembers;
+use App\Models\Rooms;
 use App\Models\UserRole;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -61,6 +63,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+
+
         $rules = [
             'name' => 'required',
             'email' => 'required',
@@ -84,6 +89,17 @@ class UserController extends Controller
             try {
                 $data = $request->only(['name', 'email', 'password']);
                 $user = Employees::create($data);
+
+                $users = Employees::all()->reject(function ($existingUser) use ($user) {
+                    return $existingUser->id === $user->id;
+                });
+                foreach ($users as $key) {
+                    $room = $key->id . '-' . $user->id;
+                    $createRoom = Rooms::create(['room_name' => $room]);
+                    RoomMembers::create(['room_id' => $createRoom->id, 'user_id' => $key->id]);
+                    RoomMembers::create(['room_id' => $createRoom->id, 'user_id' => $user->id]);
+                }
+
                 if (is_array($request->role)) {
                     foreach ($request->role as $role_id) {
                         UserRole::create(['id_user' => $user->id, 'id_role' => $role_id]);
@@ -188,7 +204,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        Employees::destroy($id);
-        return back();
+
+        try {
+            Employees::destroy($id);
+            return back();
+        } catch (\Throwable $th) {
+            Alert::warning('Xóa không thành công!');
+            return back();
+        }
     }
 }

@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>{{ config('app.name', 'Default Title') }}</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -25,9 +26,8 @@
                                     <form action="{{ route('user.signupSubmit') }}" method="post">
                                         @csrf
                                         <div class="d-flex align-items-center mb-3 pb-1">
-                                            <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                                            <a href="{{ route('homepage') }}"> <img class="w-25"
-                                                    src="{{ asset('assets/imgs/logo (1).png') }}" alt=""></a>
+                                            <a href="{{ route('homepage') }}"> <img class=""
+                                                    src="{{ asset('assets/imgs/logo.png') }}" alt=""></a>
                                         </div>
 
                                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your
