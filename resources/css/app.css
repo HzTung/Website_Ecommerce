@@ -1,0 +1,271 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+/* Header */
+
+.wrapperDashboard {
+    display: flex;
+}
+
+.headerDash {
+    width: 200px;
+    transition: all 0.25s linear;
+}
+
+.headerDash.active-bar {
+    width: 0px;
+}
+
+.logoHeaderAdmin {
+    font-size: 42px;
+    font-weight: 800;
+    color: white;
+    display: block;
+    margin: 20px auto;
+    font-family: "Permanent Marker", cursive;
+    cursor: pointer;
+    user-select: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.navDash {
+    width: 200px;
+    background-color: #00412a;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transition: all 0.25s linear;
+    overflow: hidden;
+}
+
+.navDash.active-bar {
+    width: 0px;
+}
+
+.navDash ul {
+    width: 90%;
+}
+
+.navDash li {
+    margin-bottom: 1rem;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    white-space: nowrap;
+    transition: all 0.25s ease-in-out;
+}
+
+.navDash li:last-child {
+    margin-top: 10rem;
+}
+
+.navDash li:hover {
+    background-color: white;
+}
+
+.navDash li:hover a {
+    color: #00412a;
+}
+
+.navDash a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.navDash i {
+    width: 50px;
+    padding: 10px 0;
+    margin-right: 20px;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* Main */
+.mainDash {
+    width: calc(100% - 200px);
+    transition: all 0.25s linear;
+}
+
+.mainDash.active-bar {
+    width: 100%;
+}
+
+.headerMain {
+    width: 100%;
+    height: 70px;
+    background-color: aliceblue;
+    box-shadow: 0 5px 10px gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navBar {
+    margin-left: 2rem;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    transition: all 0.25s ease-in-out;
+    background-color: #00412a;
+    cursor: pointer;
+    border: 1px solid #00412a;
+}
+
+.navBar:hover {
+    background-color: white;
+}
+
+.navBar:hover i {
+    color: #00412a;
+}
+
+.navBar i {
+    font-size: 24px;
+    color: white;
+}
+
+.iconBar {
+    margin-right: 30px;
+}
+
+.searchBar input {
+    border: 1px solid #00412a;
+    border-left: none;
+    transition: all 0.2s ease-in-out;
+    padding: 4.5px 0;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    width: 100%;
+}
+
+.searchBar {
+    display: flex;
+    width: 50%;
+}
+
+.searchBar i {
+    border: 1px solid #00412a;
+    border-right: none;
+    padding: 9.1px;
+    color: #00412a;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.iconBar a {
+    font-size: 26px;
+    margin: 0 15px;
+    text-decoration: none;
+    color: #00412a;
+}
+
+.contentDash {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 3rem 0;
+}
+
+.childrenContent {
+    width: 20rem;
+    height: 11rem;
+    background-color: black;
+    border-radius: 10px;
+    user-select: none;
+}
+
+.turnover {
+    background-color: #2f9d77;
+}
+
+.grossProduct {
+    background-color: #e29160;
+}
+
+.customer {
+    background-color: #06326f;
+}
+
+.childrenContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapBoxChil {
+    width: 70%;
+}
+
+.wrapBoxChil {
+    color: white;
+}
+
+.wrapBoxChil div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrapBoxChil div i {
+    font-size: 32px;
+}
+
+.wrapBoxChil span {
+    display: block;
+}
+
+.wrapBoxChil span:nth-child(2) {
+    font-size: 28px;
+    /* padding-left: 10%; */
+}
+
+.wrapBoxChil div,
+.wrapBoxChil span {
+    margin: 10px 0;
+}
+
+.chart {
+    /* width: 45rem;
+    height: 30rem; */
+    font-size: 24px;
+}
+
+.chartBar {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10rem;
+}
+
+.chartBar h3 {
+    margin: 30px;
+    font-size: 20px;
+    font-weight: 800;
+    color: #2f9d77;
+}
+
+.tableMyChart {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.wrapperChart {
+    width: 70%;
+    height: 30rem;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 960px) {
+    .chart {
+        width: 25rem;
+        height: 15rem;
+        margin: 4rem;
+        font-size: 24px;
+    }
+}

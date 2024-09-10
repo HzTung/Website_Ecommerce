@@ -29,7 +29,10 @@ class ProductService
 
     public function select_Pro_where($id)
     {
-        return  Products::find($id);
+        try {
+            return  Products::find($id);
+        } catch (\Throwable $th) {
+        }
     }
 
     public function updatePro($id, $name, $quantity, $price, $mota, $img, $cate_id)

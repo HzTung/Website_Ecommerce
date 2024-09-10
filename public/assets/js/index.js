@@ -32,3 +32,21 @@ if (IconUser !== null) {
         userForm.style.position = "absolute"; // Make sure the position is set properly
     });
 }
+
+const menuToggle = document.querySelector(".menu_toggle");
+const iconMenu = document.querySelector(".iconMenu");
+const iconClose = document.querySelector(".iconClose");
+
+if (iconMenu) {
+    iconMenu.addEventListener("click", (e) => {
+        e.preventDefault();
+        menuToggle.classList.remove("d-none"); // Show the menu
+    });
+}
+
+if (iconClose) {
+    iconClose.addEventListener("click", (e) => {
+        e.preventDefault();
+        menuToggle.classList.add("d-none"); // Hide the menu
+    });
+}

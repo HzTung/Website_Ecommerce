@@ -147,18 +147,18 @@ if (typeof btnFix !== "undefined" && btnFix !== null) {
 
 //
 
-const formBuying = document.getElementById("formBuying");
-const btnBuying = document.getElementById("btn-buying");
+// const formBuying = document.getElementById("formBuying");
+// const btnBuying = document.getElementById("btn-buying");
 
-if (btnBuying) {
-    btnBuying.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (formBuying.style.display === "block") {
-            formBuying.style.display = "none";
-        } else {
-            formBuying.style.display = "block";
-            formBuying.style.transition = "0.6s ease-in-out";
-        }
-        formBuying.classList.toggle("sticky");
-    });
-}
+// if (btnBuying) {
+//     btnBuying.addEventListener("click", (e) => {
+//         e.preventDefault();
+//         if (formBuying.style.display === "block") {
+//             formBuying.style.display = "none";
+//         } else {
+//             formBuying.style.display = "block";
+//             formBuying.style.transition = "0.6s ease-in-out";
+//         }
+//         formBuying.classList.toggle("sticky");
+//     });
+// }

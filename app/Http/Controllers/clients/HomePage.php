@@ -33,16 +33,17 @@ class HomePage extends Controller
 
     public function ProDetails(Request $request)
     {
-
         $id = $request->id;
         $getCate = $this->categoryService->getCate();
         $pro = $this->productService->select_Pro_where($id);
+        if (!$pro) {
+            abort(403);
+        }
         $proAll = Products::where('category_id', $pro->category_id)->get();
         $prosCollection = collect($proAll);
         $filteredPros = $prosCollection->reject(function ($proAll) use ($id) {
             return $proAll['id'] == $id;
         });
-
 
         $comment = Comments::where('name_pro', '=', $pro->name_sp)->get();
         return view('clients.pro-details', [
@@ -66,7 +67,11 @@ class HomePage extends Controller
         $getCate = $this->categoryService->getCate();
         if ($id !== '') {
             $cate = $this->categoryService->select_Cate_Where($id);
-            $name = $cate['name_category'];
+            if ($cate) {
+                $name = $cate['name_category'];
+            } else {
+                abort(403);
+            }
             $getPro = Products::where('category_id', $id)->paginate(20);
         } else {
             $getPro = $this->productService->select_pro();

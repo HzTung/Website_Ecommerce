@@ -23,7 +23,8 @@ class CheckAuth
         }
         $route = $request->route()->getName();
         if ($request->user('admin')->cant($route)) {
-            return redirect()->route('admin.home')->with('msg', 'bạn không có quyền truy cập!');
+            abort(403, 'Unauthorized action.');
+            // return redirect()->route('admin.home')->with('msg', 'bạn không có quyền truy cập!');
         }
         return $next($request);
     }

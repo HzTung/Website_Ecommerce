@@ -1,5 +1,5 @@
 <section class="mt-5">
-    <div class="m-4">
+    <div class="m-xl-4">
         <div class="parallax bg-image d-flex justify-content-center align-items-center ">
             <div class="text-center text-white">
                 <p class="mt-3 ">New Collection</p>

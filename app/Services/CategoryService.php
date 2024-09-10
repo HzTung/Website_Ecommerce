@@ -25,7 +25,10 @@ class CategoryService
 
     public function select_Cate_Where($id)
     {
-        return Category::find($id);
+        try {
+            return Category::find($id);
+        } catch (\Throwable $th) {
+        }
     }
 
     public function updateCate($id, $name, $mota)

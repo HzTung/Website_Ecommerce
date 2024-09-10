@@ -56,7 +56,8 @@
                                 </div>
                                 <!--  -->
 
-                                <div class="col-lg-5">
+                                <form action="{{ route('momoPay') }}" method="POST" class="col-lg-5">
+                                    @csrf
                                     <div class="card bg-primary text-white rounded-3">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -68,8 +69,7 @@
                                                 <p class="mb-2">{{ $totalPrice }} đ</p>
                                             </div>
                                             <div>
-                                                <button id="btn-buying" type="submit"
-                                                    class="btn btn-info btn-block btn-lg text-center">
+                                                <button type="submit" class="btn btn-info btn-block btn-lg text-center">
                                                     <div class="d-flex justify-content-between">
                                                         <span>Đặt Hàng </span>
                                                         <i class="ti-shift-right"></i>
@@ -78,7 +78,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>

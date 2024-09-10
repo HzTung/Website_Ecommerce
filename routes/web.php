@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\BillsController;
 use App\Http\Controllers\clients\CartController;
 use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\CategoriesController;
+use App\Http\Controllers\admin\DasboardController;
 use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\clients\AuthUserController;
 use App\Http\Controllers\admin\UserController;
@@ -36,10 +37,7 @@ Route::get('admin/login', [AuthController::class, 'login'])->name('admin.login')
 Route::post('admin/login', [AuthController::class, 'loginSubmit'])->name('admin.loginSubmit');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'checkAuth', 'as' => 'admin.'], function () {
-    Route::get('/', function () {
-        return view('admin.Dashboard');
-    })->name('home');
-
+    Route::get('/', [DasboardController::class, 'index'])->name('home');
 
     //logout
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
